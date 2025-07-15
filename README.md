@@ -1,35 +1,108 @@
-# CloudBox Lite 
+# CloudBox Lite ☁️
 
-## Overview
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Express.js](https://img.shields.io/badge/Express.js-404D59?style=flat&logo=express&logoColor=white)](https://expressjs.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Drizzle ORM](https://img.shields.io/badge/Drizzle_ORM-FF6B6B?style=flat&logo=drizzle&logoColor=white)](https://orm.drizzle.team/)
 
-CloudBox Lite is a modern file storage and sharing application built with React, Express, and PostgreSQL. The application provides a Dropbox-like experience with secure file management, user authentication, and sharing capabilities optimized for mobile devices.
+[![GitHub stars](https://img.shields.io/github/stars/simonpierreboucher02/cloudboxlite-app?style=social)](https://github.com/simonpierreboucher02/cloudboxlite-app)
+[![GitHub forks](https://img.shields.io/github/forks/simonpierreboucher02/cloudboxlite-app?style=social)](https://github.com/simonpierreboucher02/cloudboxlite-app)
+[![GitHub issues](https://img.shields.io/github/issues/simonpierreboucher02/cloudboxlite-app)](https://github.com/simonpierreboucher02/cloudboxlite-app/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/simonpierreboucher02/cloudboxlite-app)](https://github.com/simonpierreboucher02/cloudboxlite-app/pulls)
 
-## User Preferences
+A modern, secure file storage and sharing application built with React, Express, and PostgreSQL. CloudBox Lite provides a Dropbox-like experience with advanced features like JWT authentication, file sharing, and mobile-first responsive design.
 
-Preferred communication style: Simple, everyday language.
+## ✨ Features
 
-## System Architecture
+- 🔐 **Secure Authentication** - JWT-based auth with bcrypt password hashing
+- 📁 **File Management** - Upload, organize, and manage files with folder structure
+- 🔗 **File Sharing** - Generate shareable links with optional expiration
+- 📱 **Mobile-First Design** - Responsive UI optimized for mobile devices
+- 🌙 **Dark/Light Theme** - Automatic theme switching based on system preference
+- 🚀 **Modern Stack** - Built with React 18, TypeScript, and Tailwind CSS
+- 🗄️ **Type-Safe Database** - PostgreSQL with Drizzle ORM for robust data management
+- ⚡ **Fast Development** - Vite for lightning-fast builds and hot reload
 
-### Full-Stack Monorepo Structure
-The project follows a monorepo pattern with three main directories:
-- `client/` - React frontend with Vite build system
-- `server/` - Express.js backend API
-- `shared/` - Common TypeScript schemas and types
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18+ 
+- PostgreSQL database
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/simonpierreboucher02/cloudboxlite-app.git
+   cd cloudboxlite-app
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   # Create .env file
+   DATABASE_URL="your_postgresql_connection_string"
+   JWT_SECRET="your_jwt_secret_key"
+   NODE_ENV="development"
+   ```
+
+4. **Set up the database**
+   ```bash
+   npm run db:push
+   ```
+
+5. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Build for production**
+   ```bash
+   npm run build
+   npm start
+   ```
+
+## 🏗️ Architecture
+
+### Monorepo Structure
+```
+cloudboxlite-app/
+├── client/          # React frontend with Vite
+├── server/          # Express.js backend API
+└── shared/          # Common TypeScript schemas
+```
 
 ### Technology Stack
-- **Frontend**: React 18, TypeScript, Tailwind CSS, Wouter (routing), TanStack Query
-- **Backend**: Express.js, TypeScript, JWT authentication, Multer (file uploads)
-- **Database**: PostgreSQL with Drizzle ORM
-- **UI Library**: Radix UI components with shadcn/ui styling
-- **Build Tools**: Vite (frontend), ESBuild (backend), Tailwind CSS
 
-## Key Components
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **Frontend** | React 18 + TypeScript | Modern UI with type safety |
+| **Styling** | Tailwind CSS + Radix UI | Beautiful, accessible components |
+| **State Management** | TanStack Query | Server state management |
+| **Routing** | Wouter | Lightweight client-side routing |
+| **Backend** | Express.js + TypeScript | RESTful API server |
+| **Database** | PostgreSQL + Drizzle ORM | Type-safe database operations |
+| **Authentication** | JWT + bcrypt | Secure user authentication |
+| **File Uploads** | Multer | Multipart file handling |
+| **Build Tools** | Vite + ESBuild | Fast development and production builds |
+
+## 🔧 Key Components
 
 ### Authentication System
 - **JWT-based authentication** with 7-day token expiration
 - **Password security** using bcrypt with 12 salt rounds
-- **Recovery key system** - unique alphanumeric keys generated at signup for password reset
-- **No email dependency** - recovery relies on generated keys shown to users
+- **Recovery key system** - unique alphanumeric keys for password reset
+- **No email dependency** - recovery relies on generated keys
 
 ### File Management
 - **Multer-based file uploads** with 50MB size limit
@@ -39,19 +112,31 @@ The project follows a monorepo pattern with three main directories:
 - **File sharing** via generated tokens with optional expiration
 
 ### Database Schema
-- **Users table**: id, username, password, recoveryKey, timestamps
-- **Folders table**: id, userId, name, parentId, timestamps
-- **Files table**: id, userId, folderId, filename, originalName, mimeType, size, path, timestamps
-- **Share links table**: id, fileId, userId, token, expiresAt, isActive, timestamps
+```sql
+-- Users table
+users: id, username, password, recoveryKey, timestamps
 
-### UI/UX Design
+-- Folders table  
+folders: id, userId, name, parentId, timestamps
+
+-- Files table
+files: id, userId, folderId, filename, originalName, mimeType, size, path, timestamps
+
+-- Share links table
+share_links: id, fileId, userId, token, expiresAt, isActive, timestamps
+```
+
+## 📱 UI/UX Features
+
 - **Mobile-first responsive design** with bottom navigation
 - **Dark/light theme support** with system preference detection
 - **Grid and list view modes** for file browsing
 - **Drag & drop file uploads** with progress indication
 - **Modal-based interactions** for uploads, sharing, and key display
+- **Toast notifications** for user feedback
+- **Skeleton loading states** for better UX
 
-## Data Flow
+## 🔄 Data Flow
 
 ### Authentication Flow
 1. User signs up → password hashed → recovery key generated → JWT token issued
@@ -71,7 +156,7 @@ The project follows a monorepo pattern with three main directories:
 3. Share URL returned → user can copy/send link
 4. Access via share link → token validated → file served
 
-## External Dependencies
+## 📦 Dependencies
 
 ### Core Dependencies
 - **@neondatabase/serverless** - PostgreSQL database connection
@@ -89,7 +174,7 @@ The project follows a monorepo pattern with three main directories:
 - **Tailwind CSS** - Utility-first CSS framework
 - **ESBuild** - Fast JavaScript bundler for server
 
-## Deployment Strategy
+## 🚀 Deployment
 
 ### Build Process
 1. **Frontend build**: Vite compiles React app to `dist/public/`
@@ -97,20 +182,44 @@ The project follows a monorepo pattern with three main directories:
 3. **Database migrations**: Drizzle handles schema changes
 
 ### Environment Variables
-- `DATABASE_URL` - PostgreSQL connection string (required)
-- `JWT_SECRET` - Secret key for JWT signing
-- `NODE_ENV` - Environment mode (development/production)
+```bash
+DATABASE_URL="postgresql://user:password@host:port/database"
+JWT_SECRET="your-secret-key-here"
+NODE_ENV="production"
+```
 
 ### File Storage
 - Files stored in `uploads/` directory organized by user ID
 - Production deployment should use persistent storage volume
 - File paths stored in database for retrieval
 
-### Security Considerations
+## 🔒 Security Considerations
+
 - JWT tokens expire after 7 days
 - Passwords hashed with bcrypt (12 rounds)
 - File access restricted to authenticated users
 - Share links can have expiration dates
 - Recovery keys are static per user account
+- CORS protection for API endpoints
+- Input validation with Zod schemas
 
-The application is designed to be lightweight and performant, with a focus on mobile usability and secure file management without requiring email infrastructure.
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Simon Pierre Boucher**
+- GitHub: [@simonpierreboucher02](https://github.com/simonpierreboucher02)
+
+---
+
+⭐ **Star this repository if you found it helpful!**
